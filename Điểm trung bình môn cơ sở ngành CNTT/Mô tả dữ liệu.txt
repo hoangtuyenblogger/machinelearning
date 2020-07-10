@@ -1,0 +1,13 @@
+- Cột thứ 1: SV
+- Cột thứ 2: NMCNTT
+- Cột thứ 3: CSLT
+- Cột thứ 4: KTLT
+- Cột thứ 5: CTDLGT
+- Cột thứ 6: MMT
+
+* SV: Sinh viên năm thứ
+* NMCNTT: Nhập môn CNTT
+* CSLT: Cơ sở lập trình
+* KTLT: Kĩ thuật lập trình
+* CTDLGT: Cấu trúc dữ liệu và giải thuật
+* MMT: Mạng máy tính
