@@ -27,18 +27,14 @@ def Pearson(a,b):
   return diff_ab / math.sqrt(diff_a2 * diff_b2)
 
 
-def Spearman(a,b):
-  n = len(a)
-  rank_a = 0
-  rank_b = 0
-  d = 0 ## d = rgA - rgB
-  d2 = 0
-  for i in range(n):
-    rank_a = a[i]
-    rank_b = b[i]
-    d += rank_a-rank_b
-    d2+= d * d
-  return (6*d2)/(n*n*n - n) ## 6 * d2 / n(n*n - 1)
+def Spearman(x, y):
+  dsquare = 0
+  for i in range(len(x)):
+    if (x[i] >= y[i]):
+      dsquare += (x[i] - y[i]) ** 2
+    else:
+      dsquare += (y[i] - x[i]) ** 2
+  return float(1 - ((6 * dsquare) / (len(x) * (len(x) ** 2 - 1))))
 
 
 

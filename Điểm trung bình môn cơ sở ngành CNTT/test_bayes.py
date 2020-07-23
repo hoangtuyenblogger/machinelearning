@@ -1,19 +1,33 @@
 #BAYES
+import pandas as pd
+from sklearn import datasets, linear_model
+from sklearn.model_selection import train_test_split
+from matplotlib import pyplot as plt
 
-def load_csv(filename):
-    lines = csv.reader(open(r"classav.csv"))
+
+import csv
+import random
+from random import seed
+import math
+import sys
+from math import pi, sqrt, exp
+
+def load_data(filename):
+    lines = csv.reader(open(filename, "r"))
     dataset = list(lines)
     for i in range(len(dataset)):
         dataset[i] = [float(x) for x in dataset[i]]
+
     return dataset
 
-def splitDataset(dataset, splitRatio):
+def split_data(dataset, splitRatio):
     trainSize = int(len(dataset) * splitRatio)
     trainSet = []
     copy = list(dataset)
     while len(trainSet) < trainSize:
-        index = randrange(len(copy))
+        index = random.randrange(len(copy))
         trainSet.append(copy.pop(index))
+
     return [trainSet, copy]
 
 # Split a dataset into k folds
@@ -24,7 +38,7 @@ def cross_validation_split(dataset, n_folds):
     for _ in range(n_folds):
         fold = list()
         while len(fold) < fold_size:
-            index = randrange(len(dataset_copy))
+            index = random.randrange(len(dataset_copy))
             fold.append(dataset_copy.pop(index))
         dataset_split.append(fold)
     return dataset_split
@@ -146,3 +160,28 @@ def naive_bayes(train, test):
         output = predict(summarize, row)
         predictions.append(output)
     return (predictions)
+
+
+# Test Naive Bayes on Iris Dataset
+seed(4)
+filename = 'data_khongco_tieude.csv'
+dataset = load_data(filename)
+
+splitRatio = 0.67
+
+
+n_folds = 5
+scores = evaluate_algorithm(dataset, naive_bayes, n_folds)
+trainingSet, testSet = split_data(dataset, splitRatio)
+print(trainingSet, testSet)
+print(
+    'Chia {0} hàng thành {1} dòng huấn luyện và {2} dòng kiểm tra'.format(len(dataset), len(trainingSet), len(testSet)))
+print('Độ Chính Xác: %s' % scores)
+print('Độ Chính Xác Trung Bình: %.3f%%' % (sum(scores) / float(len(scores))))
+model = summarize_by_class(dataset)
+row = [4, 2, 1, 80, 5.5]
+# predict the label
+label = predict(model, row)
+print('Dữ liệu vào=' + str(row))
+
+print('Dự đoán : ', label)

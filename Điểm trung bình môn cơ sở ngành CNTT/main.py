@@ -7,6 +7,8 @@ import math
 import sys
 import matplotlib.pyplot as plt
 import Pearson_Spearman as PS
+import seaborn as sns
+import Bayes as bs
 
 def main():
     filename = 'data.csv'
@@ -47,16 +49,21 @@ def main():
     print('Điểm xuất hiện nhiều nhất của MMT là : ', st.mode(MMT))
     print('####Phân tích độ tương quan giữa các đại lượng  Pearson  và Spearman#####')
     
-    print('Spearon giữa CSLT và CTDLGT là: ', PS.Pearson(CSLT, CTDLGT))
-    print('Spearon giữa KTLT và CTDLGT là: ',PS.Pearson(KTLT,CTDLGT))
+    print('Pearon giữa CSLT và CTDLGT là: ', PS.Pearson(CSLT, CTDLGT))
+    print('Pearon giữa KTLT và CTDLGT là: ',PS.Pearson(KTLT,CTDLGT))
     print('#########################################')
-    #biểu đồ Spearman
-    plt.plot(KTLT,CTDLGT)
-    plt.axis([1, 10, 1, 10])
-    plt.xlabel('KTLT')
-    plt.ylabel('CTDLGT')
+    print('Spearon giữa CSLT và CTDLGT là: ', PS.Spearman(CSLT, CTDLGT))
+    print('Spearon giữa KTLT và CTDLGT là: ', PS.Spearman(KTLT, CTDLGT))
+    print('#########################################')
+    print('#########################################')
+
+    df1 = pd.read_csv(filename, usecols=["NMCNTT", "CSLT", "KTLT", "CTDLGT", "MMT"])
+    f = plt.figure(figsize=(8, 6))
+    colormap = sns.diverging_palette(120, 10, as_cmap=True)
+    sns.heatmap(df1.corr(), cmap=colormap, annot=True)
+    plt.xticks(range(df1.shape[1]), df1.columns, fontsize=10, rotation=45)
+    plt.yticks(range(df1.shape[1]), df1.columns, fontsize=10, rotation=0)
+    plt.title('Đồ thị Heatmap\n', fontsize=20)
     plt.show()
 if __name__ == '__main__':
     main()
-
-
