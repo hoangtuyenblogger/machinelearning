@@ -8,7 +8,6 @@ import sys
 import matplotlib.pyplot as plt
 import Pearson_Spearman as PS
 import seaborn as sns
-import Bayes as bs
 
 def main():
     filename = 'data.csv'
@@ -52,8 +51,8 @@ def main():
     print('Pearon giữa CSLT và CTDLGT là: ', PS.Pearson(CSLT, CTDLGT))
     print('Pearon giữa KTLT và CTDLGT là: ',PS.Pearson(KTLT,CTDLGT))
     print('#########################################')
-    print('Spearon giữa CSLT và CTDLGT là: ', PS.Spearman(CSLT, CTDLGT))
-    print('Spearon giữa KTLT và CTDLGT là: ', PS.Spearman(KTLT, CTDLGT))
+    print('Spearman giữa CSLT và CTDLGT là: ', PS.Spearman(CSLT, CTDLGT))
+    print('Spearman giữa KTLT và CTDLGT là: ', PS.Spearman(KTLT, CTDLGT))
     print('#########################################')
     # biểu đồ Spearman
     plt.title('Biểu đồ thể hiện tương quan giữa môn KTLT và CTDLGT')
