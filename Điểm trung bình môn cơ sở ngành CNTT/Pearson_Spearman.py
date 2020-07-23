@@ -38,7 +38,3 @@ def Spearman(x, y):
 
 
 
-x=[1,2,3,4,5,6,7,8]
-y=[1,3,5,4,5,7,8,4]
-print('Pearson = ',Pearson(x, y))
-print('Spearman = ',Spearman(x,y))

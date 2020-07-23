@@ -55,6 +55,13 @@ def main():
     print('Spearon giữa CSLT và CTDLGT là: ', PS.Spearman(CSLT, CTDLGT))
     print('Spearon giữa KTLT và CTDLGT là: ', PS.Spearman(KTLT, CTDLGT))
     print('#########################################')
+    # biểu đồ Spearman
+    plt.title('Biểu đồ thể hiện tương quan giữa môn KTLT và CTDLGT')
+    plt.plot(KTLT, CTDLGT)
+    plt.axis([1, 10, 1, 10])
+    plt.xlabel('KTLT')
+    plt.ylabel('CTDLGT')
+    plt.show()
     print('#########################################')
 
     df1 = pd.read_csv(filename, usecols=["NMCNTT", "CSLT", "KTLT", "CTDLGT", "MMT"])

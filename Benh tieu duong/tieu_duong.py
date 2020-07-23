@@ -6,7 +6,7 @@ import pandas
 # Load data tu CSV file
 
 def load_data(filename):
-    lines = csv.reader(open(filename, "rb"))
+    lines = csv.reader(open(filename, "r"))
     dataset = list(lines)
     for i in range(len(dataset)):
         dataset[i] = [float(x) for x in dataset[i]]
@@ -62,7 +62,7 @@ def summarize(dataset):
 def summarize_by_class(dataset):
     separated = separate_data(dataset)
     summaries = {}
-    for classValue, instances in separated.iteritems():
+    for classValue, instances in separated.items():
         summaries[classValue] = summarize(instances)
 
     return summaries
@@ -78,7 +78,7 @@ def calculate_prob(x, mean, stdev):
 # Tinh xac suat cho moi thuoc tinh phan chia theo class
 def calculate_class_prob(summaries, inputVector):
     probabilities = {}
-    for classValue, classSummaries in summaries.iteritems():
+    for classValue, classSummaries in summaries.items():
         probabilities[classValue] = 1
         for i in range(len(classSummaries)):
             mean, stdev = classSummaries[i]
@@ -92,7 +92,7 @@ def calculate_class_prob(summaries, inputVector):
 def predict(summaries, inputVector):
     probabilities = calculate_class_prob(summaries, inputVector)
     bestLabel, bestProb = None, -1
-    for classValue, probability in probabilities.iteritems():
+    for classValue, probability in probabilities.items():
         if bestLabel is None or probability > bestProb:
             bestProb = probability
             bestLabel = classValue
@@ -129,12 +129,12 @@ def get_data_label(dataset):
     return data, label
 
 def main():
-    filename = 'tieu_duong.csv'
-    splitRatio = 0.8
+    filename = 'data_khongco_tieude.csv'
+    splitRatio = 0.6
     dataset = load_data(filename)
     trainingSet, testSet = split_data(dataset, splitRatio)
 
-    print('Data size {0} \nTraining Size={1} \nTest Size={2}').format(len(dataset), len(trainingSet), len(testSet))
+    print('Data size {0} \nTraining Size={1} \nTest Size={2}'.format(len(dataset), len(trainingSet), len(testSet)))
 
     # prepare model
     summaries = summarize_by_class(trainingSet)
@@ -142,7 +142,7 @@ def main():
     # test model
     predictions = get_predictions(summaries, testSet)
     accuracy = get_accuracy(testSet, predictions)
-    print('Accuracy of my implement: {0}%').format(accuracy)
+    print('Accuracy of my implement: {0}%'.format(accuracy))
 
     # Compare with sklearn
     dataTrain, labelTrain = get_data_label(trainingSet)
@@ -154,6 +154,7 @@ def main():
 
     score = clf.score(dataTest, labelTest)
 
-    print('Accuracy of sklearn: {0}%').format(score*100)
+    print('Accuracy of sklearn: {0}%'.format(score*100))
 
-    main()
+
+main()

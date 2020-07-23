@@ -164,7 +164,7 @@ def naive_bayes(train, test):
 
 # Test Naive Bayes on Iris Dataset
 seed(4)
-filename = 'data_khongco_tieude.csv'
+filename = 'tieu_duong.csv'
 dataset = load_data(filename)
 
 splitRatio = 0.67
