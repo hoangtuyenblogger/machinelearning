@@ -9,6 +9,19 @@ import matplotlib.pyplot as plt
 import Pearson_Spearman as PS
 import seaborn as sns
 
+def max(data):
+    max = data[0]
+    for i in data:
+        if i > max:
+            max = i
+    return max
+
+def min(data):
+    min = data[0]
+    for i in data:
+        if i < min:
+            min = i
+    return min
 def main():
     filename = 'data.csv'
     data = pd.read_csv(filename)
@@ -71,5 +84,8 @@ def main():
     plt.yticks(range(df1.shape[1]), df1.columns, fontsize=10, rotation=0)
     plt.title('Đồ thị Heatmap\n', fontsize=20)
     plt.show()
+    print('Max  CDSL = ', max(CSLT))
+
+
 if __name__ == '__main__':
     main()
